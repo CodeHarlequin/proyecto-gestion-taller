@@ -1,10 +1,16 @@
-﻿using Usuarios;
+﻿using InfoGestion;
+using Usuarios;
 
 namespace ModeloInfoGestion
 {
    public class Cita
    {
+      #region CONSTANTES
+      private const byte CODIGO_MIN_LONG = 5;
+      #endregion
+
       #region MIEMBROS
+      private string _codigoIdentificacion;
       private DateTime _fechaMasHora;
       private float _presupuesto;
       private Cliente _solicitante;
@@ -16,10 +22,20 @@ namespace ModeloInfoGestion
          FechaMasHora = FechaYHora;
          Presupuesto = preSolicitar;
          Solicitante = solicitante;
-      }  
+      }
       #endregion
 
       #region PROPIEDADES
+      public string CodigoIdentificacion
+      {
+         get => _codigoIdentificacion;
+         set
+         {
+            ValidarCodigoIdentificacion(value);
+            _codigoIdentificacion = value;
+         }
+      }
+
       public DateTime FechaMasHora 
       { 
          get => _fechaMasHora;
@@ -48,6 +64,22 @@ namespace ModeloInfoGestion
       #endregion
 
       #region METODOS
+      private static void ValidarCodigoIdentificacion(string codigoValidar)
+      {
+         try
+         {
+            // Validar si el valor es nulo
+            codigoValidar = Comprobaciones.ValidarValorEntrada(codigoValidar);
+
+            // Validar limite de caracteres
+            Comprobaciones.ValidarLimiteCaracteres(codigoValidar, CODIGO_MIN_LONG, CODIGO_MIN_LONG);
+         }
+         catch (Exception errorCap)
+         {
+            throw new CodigoInvalidoException(errorCap.Message);
+         }
+      }
+
       private static void ValidarFecha(DateTime fechaValidar)
       {
          try
