@@ -10,11 +10,11 @@ namespace InfoGestion
 {
    public class Reparacion
    {
-      public enum Estado { Activo, Finalizado }
+      public enum Estado { Activa, Finalizada }
 
       #region CONSTANTES
       private const byte CODIGO_MIN_LONG = 5;
-      private const Estado ESTADO_DEF = Estado.Activo;
+      private const Estado ESTADO_DEF = Estado.Activa;
       #endregion
 
       #region MIEMBROS
@@ -26,7 +26,7 @@ namespace InfoGestion
       private Empleado[] _listaMecanicos;
 
       // Datos que determinta la informacion de la resparacion
-      private Estado _estado;
+      private Estado _estadoRep;
       private Operacion[] _listaOperaciones;
       private string _infoAdicional;
 
@@ -40,7 +40,7 @@ namespace InfoGestion
       {
          CodigoIdentificacion = codigo;
          VehiculoImplicado = vehiculo;
-         _estado = ESTADO_DEF;
+         _estadoRep = ESTADO_DEF;
       }
 
       public Reparacion(string codigo, Vehiculo vehiculo, Operacion[] operaciones, string descripcion)
@@ -90,8 +90,8 @@ namespace InfoGestion
 
       public Estado EstadoRep
       {
-         get => _estado;
-         set => _estado = value;
+         get => _estadoRep;
+         set => _estadoRep = value;
       }
 
       public Operacion[] ListaOperaciones 
@@ -133,10 +133,10 @@ namespace InfoGestion
          try
          {
             // Validar si el valor es nulo
-            codigoValidar = Comprobaciones.ValidarValorEntrada(codigoValidar);
+            codigoValidar = CompDatos.ValidarValorEntrada(codigoValidar);
 
             // Validar limite de caracteres
-            Comprobaciones.ValidarLimiteCaracteres(codigoValidar, CODIGO_MIN_LONG, CODIGO_MIN_LONG);
+            CompDatos.ValidarLimiteCaracteres(codigoValidar, CODIGO_MIN_LONG, CODIGO_MIN_LONG);
          }
          catch (Exception errorCap) 
          {
