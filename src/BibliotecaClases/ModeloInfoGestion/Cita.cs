@@ -1,10 +1,13 @@
 ﻿using InfoGestion;
+using ModeloVehiculos;
 using Usuarios;
 
 namespace ModeloInfoGestion
 {
    public class Cita
    {
+      public enum Estado { Pendiente, Confirmada }
+
       #region CONSTANTES
       private const byte CODIGO_MIN_LONG = 5;
       #endregion
@@ -12,16 +15,25 @@ namespace ModeloInfoGestion
       #region MIEMBROS
       private string _codigoIdentificacion;
       private DateTime _fechaMasHora;
+
+      // Datos complentacion de la cita
       private float _presupuesto;
+      private string _descripcion;
+      private Estado _estadoCita;
+
+      // Datos de indentificacion de los objetos implicados
       private Cliente _solicitante;
+      private Vehiculo _vehiculoReparar;
       #endregion
 
       #region CONSTRUCTORES
-      public Cita(DateTime FechaYHora, float preSolicitar, Cliente solicitante)
+      public Cita(DateTime FechaHora, string descripcionGeneral, Cliente solicitante, Vehiculo vehiculo)
       {
-         FechaMasHora = FechaYHora;
-         Presupuesto = preSolicitar;
+         FechaMasHora = FechaHora;
+         Descripcion = descripcionGeneral;
          Solicitante = solicitante;
+         VehiculoReparar = vehiculo;
+         EstadoCita = Estado.Confirmada;
       }
       #endregion
 
@@ -61,6 +73,24 @@ namespace ModeloInfoGestion
          get => _solicitante; 
          set => _solicitante = value; 
       }
+
+      public string Descripcion 
+      { 
+         get => _descripcion; 
+         set => _descripcion = value; 
+      }
+
+      public Vehiculo VehiculoReparar 
+      { 
+         get => _vehiculoReparar; 
+         set => _vehiculoReparar = value; 
+      }
+
+      public Estado EstadoCita 
+      {
+         get => _estadoCita; 
+         set => _estadoCita = value; 
+      }
       #endregion
 
       #region METODOS
@@ -69,10 +99,10 @@ namespace ModeloInfoGestion
          try
          {
             // Validar si el valor es nulo
-            codigoValidar = Comprobaciones.ValidarValorEntrada(codigoValidar);
+            codigoValidar = CompDatos.ValidarValorEntrada(codigoValidar);
 
             // Validar limite de caracteres
-            Comprobaciones.ValidarLimiteCaracteres(codigoValidar, CODIGO_MIN_LONG, CODIGO_MIN_LONG);
+            CompDatos.ValidarLimiteCaracteres(codigoValidar, CODIGO_MIN_LONG, CODIGO_MIN_LONG);
          }
          catch (Exception errorCap)
          {

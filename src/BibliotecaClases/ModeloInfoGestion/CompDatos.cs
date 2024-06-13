@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace InfoGestion
 {
    // Solo va a poder ser accededido dentro de su mismo namespace
-   internal static class Comprobaciones
+   internal static class CompDatos
    {
       internal static string ValidarValorEntrada(string cadenaValidar)
       {

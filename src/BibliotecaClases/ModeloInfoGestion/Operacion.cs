@@ -63,10 +63,10 @@ namespace InfoGestion
          try
          {
             // Nombre no puede ser null
-            nombreValidar = Comprobaciones.ValidarValorEntrada(nombreValidar);
+            nombreValidar = CompDatos.ValidarValorEntrada(nombreValidar);
 
             // Limite de caracteres no puede superiro el limite establecido
-            Comprobaciones.ValidarLimiteCaracteres(nombreValidar, null, NOMBRE_MAX_LONG);
+            CompDatos.ValidarLimiteCaracteres(nombreValidar, null, NOMBRE_MAX_LONG);
          }
          catch (Exception errorCap)
          {
@@ -79,10 +79,10 @@ namespace InfoGestion
          try
          {
             // Descripcion no puede ser null
-            descripcionValidar = Comprobaciones.ValidarValorEntrada(descripcionValidar);
+            descripcionValidar = CompDatos.ValidarValorEntrada(descripcionValidar);
 
             // Limite de caracteres no puede superiro el limite establecido
-            Comprobaciones.ValidarLimiteCaracteres(descripcionValidar, null, DESCRIP_MAX_LONG);
+            CompDatos.ValidarLimiteCaracteres(descripcionValidar, null, DESCRIP_MAX_LONG);
          }
          catch (Exception errorCap)
          {
