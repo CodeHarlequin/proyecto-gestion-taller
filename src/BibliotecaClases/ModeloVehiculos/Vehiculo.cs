@@ -42,17 +42,17 @@ namespace ModeloVehiculos
       // CONSTRUCTORES
       #region CONSTRUCTORES
       // PK
-      public Vehiculo(string numbastidor, string matricula, Cliente propietario)
+      public Vehiculo(string numbastidor, Cliente propietario)
       {
          NumBastidor = numbastidor;
-         Matricula = matricula;
          Propietario = propietario;
       }
 
       // Completo
       public Vehiculo(string numBastidor, string matricula, string marca, string modelo, Tipo tipo, Cliente propietario)
-         : this(numBastidor, matricula, propietario)
+         : this(numBastidor,propietario)
       {
+         Matricula = matricula;
          Marca = marca;
          Modelo = modelo;
          Tipo = tipo;
