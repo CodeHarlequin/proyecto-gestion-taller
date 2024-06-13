@@ -27,10 +27,10 @@ namespace ModeloInfoGestion
       #endregion
 
       #region CONSTRUCTORES
-      public Cita(DateTime FechaYHora, string descripcion, Cliente solicitante, Vehiculo vehiculo)
+      public Cita(DateTime FechaHora, string descripcionGeneral, Cliente solicitante, Vehiculo vehiculo)
       {
-         FechaMasHora = FechaYHora;
-         Descripcion = descripcion;
+         FechaMasHora = FechaHora;
+         Descripcion = descripcionGeneral;
          Solicitante = solicitante;
          VehiculoReparar = vehiculo;
          EstadoCita = Estado.Confirmada;
