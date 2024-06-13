@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
+using Usuarios;
 
 namespace BaseDatos
 {
@@ -71,7 +72,7 @@ namespace BaseDatos
       /// </summary>
       /// <param name="queryEjecutar"></param>
       /// <returns></returns>
-      public static TClase[] OptenerListaObjetos<TClase>(string queryEjecutar)
+      public static TClase[] OptenerListaObjetos<TClase>(string queryEjecutar) where TClase : class
       {
          // Recursos locales
          List<TClase> listaObjetos;
@@ -86,7 +87,7 @@ namespace BaseDatos
          // Se recorre el DataRowCollection optenido del la propieda Rows
          foreach (DataRow filaDatos in datosOptenidos.Tables[nombreTablaDatos].Rows)
          {
-            listaObjetos.Add(ConstruirObjeto<TClase>(filaDatos, nombreTablaDatos));
+            listaObjetos.Add(CreacionObjetos.ConstruirObjeto<TClase>(filaDatos, nombreTablaDatos));
          }
 
          // Internamente se trabaja con un list pero para mayor facilidad para los prograamodres que utilizan el metodo
@@ -126,11 +127,5 @@ namespace BaseDatos
             conexionDB.Close();
          }
       }
-      
-      private static TClase ConstruirObjeto<TClase>(DataRow filaDatos, string nombreTabla)
-      {
-         throw new NotImplementedException();
-      }
-
    }
 }
