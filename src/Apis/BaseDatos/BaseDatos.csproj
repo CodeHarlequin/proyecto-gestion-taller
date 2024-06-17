@@ -11,7 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BibliotecaClases\ModeloInfoGestion\InfoGestion.csproj" />
     <ProjectReference Include="..\..\BibliotecaClases\ModeloUsuarios\Usuarios.csproj" />
+    <ProjectReference Include="..\..\BibliotecaClases\ModeloVehiculos\Vehiculos.csproj" />
   </ItemGroup>
 
 </Project>

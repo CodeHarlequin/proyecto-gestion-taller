@@ -11,69 +11,141 @@ namespace BaseDatos
 {
    public static class CreacionObjetos
    {
-      public static TClase? ConstruirObjeto<TClase>(DataRow filaDatos, string nombreTabla) where TClase : class
-      {
-         TClase? objetoDevolver = null;
-
-         switch (nombreTabla)
-         {
-            case "Cliente":
-               objetoDevolver = CrearInstancia<Cliente>(filaDatos) as TClase;
-               break;
-            case "Empleado":
-               objetoDevolver = CrearInstancia<Empleado>(filaDatos) as TClase;
-               break;
-         }
-
-         return objetoDevolver;
-      }
-
-      public static TClase? CrearInstancia<TClase>(DataRow filaDatos) where TClase : class
+      public static object? CrearInstancia(Type tipoObjeto, DataRow filaDatos)
       {
          // Recursos locales
-         TClase? objetoDeInstancia = null;
+         object? objetoDeInstancia = null;
          ConstructorInfo[] listaConstructores;
-         ParameterInfo[] listaParametros;
-         ParameterInfo parametro;
+         ConstructorInfo constructor;
          object[] argumentos;
-         bool puedeCrear = true;
+         bool objetoConstruido;
 
-         // Obtener todos los constructores de la clase
-         listaConstructores = typeof(TClase).GetConstructors(); 
+         // Inializacion
+         objetoConstruido = false;
+         listaConstructores = tipoObjeto.GetConstructors()
+            .Where(cons => cons.GetParameters().Length == filaDatos.Table.Columns.Count)
+            .ToArray(); // Cargar la lista de costructores con el mismo numero de columnas
 
-         foreach (ConstructorInfo constructor in listaConstructores)
+         // Probamos todos los constructores de una determinada clase
+         for (int indice = 0; indice < listaConstructores.Length && !objetoConstruido; indice++)
          {
-            // Obtener los parámetros del constructor
-            listaParametros = constructor.GetParameters();
+            constructor = listaConstructores[indice];
 
-            // Preparar un array para almacenar los argumentos
-            argumentos = new object[listaParametros.Length];
-
-            for (int i = 0; i < listaParametros.Length; i++)
+            try
             {
-               parametro = listaParametros[i];
+               // Optien el listado de argumetos que se le pasara al constructor
+               argumentos = ObtenerArgumentosParaConstructor(constructor, filaDatos);
 
-               try
-               {
-                  // Asignar el valor del DataRow al array de argumentos
-                  argumentos[i] = Convert.ChangeType(filaDatos[parametro.Name], parametro.ParameterType);
-               }
-               catch
-               {
-                  // Si hay un error al convertir el valor, no se puede crear usando este constructor
-                  puedeCrear = false;
-                  throw new Exception();
-               }
+               // Intenta invocar el constructror con los valores optenidos
+               objetoDeInstancia = constructor.Invoke(argumentos);
+               objetoConstruido = true;
             }
-
-            if (puedeCrear)
+            catch
             {
-               // Crear una instancia con el constructor y los argumentos
-               objetoDeInstancia = (TClase)constructor.Invoke(argumentos);
+               // Si se prodce una excepcion es por que los valores no son los correctos
+               // por lo que no es el constructor adecuado
             }
          }
 
          return objetoDeInstancia;
+      }
+
+      private static object[] ObtenerArgumentosParaConstructor(ConstructorInfo constructor, DataRow filaDatos)
+      {
+         // Recursos locales
+         ParameterInfo[] listaParametros;
+         ParameterInfo parametro;
+         object[] listaArgumentos;
+         object valorArgumento;
+         string nombreColumna;
+
+         // Inializacion
+         listaParametros = constructor.GetParameters();
+         listaArgumentos = new object[listaParametros.Length];
+
+         for (int indice = 0; indice < listaParametros.Length; indice++)
+         {
+            // Almacena de forma temporal el parametro por el que operar
+            parametro = listaParametros[indice];
+
+            // Optiene el nombre de la columna donde se aloja el dato en la tabla
+            nombreColumna = DiccionarioCampos.OptenerNombreColumna(constructor, parametro);
+
+            // Optien el valor que se tomara como argumento
+            valorArgumento = ObtenerValorParaArgumento(parametro, filaDatos, nombreColumna);
+
+            try
+            {
+               // Realiza la conversion del valor al tipo esperado por el parametro
+               listaArgumentos[indice] = parametro.ParameterType.IsArray
+                  ? ConversionManualTipoArray(valorArgumento, parametro.ParameterType)
+                  : Convert.ChangeType(valorArgumento, parametro.ParameterType);
+            }
+            catch (Exception)
+            {
+               throw;
+            }
+         }
+
+         return listaArgumentos;
+      }
+
+      private static object ObtenerValorParaArgumento(ParameterInfo parametro, DataRow filaDatos, string nombreColumna)
+      {
+         // Recursos locales
+         object valorOptenido;
+         Type tipoParametro;
+
+         // Inializacion
+         tipoParametro = parametro.ParameterType;
+
+         try
+         {
+            // Optine el valor contendio en una determinada columna
+            valorOptenido = filaDatos[nombreColumna];
+
+            // En caso de ser de que el parametro admita un valor de tipo objeto
+            if (tipoParametro.IsClass && tipoParametro != typeof(string))
+            {
+               valorOptenido = ApiBaseDatos.OptenerObjetoPorTipo(tipoParametro, valorOptenido.ToString());
+            }
+         }
+         catch (Exception)
+         {
+            throw;
+         }
+
+         return valorOptenido;
+      }
+
+      private static object ConversionManualTipoArray(object valorArgumento, Type tipoArrayEsperado)
+      {
+         // Recursos locales
+         Array valorArray;
+         Array arrayConvertido = null;
+
+         // Obtener el tipo de los elementos del array
+         // Operacion[] => Operacion
+         tipoArrayEsperado = tipoArrayEsperado.GetElementType();
+
+         // Convertir el valorArgumento a un array
+         valorArray = (Array)valorArgumento;
+
+         // Evitar realizar ejecuciones inecesarias
+         if (valorArray != null)
+         {
+            // Crear un nuevo array del tipo indicado
+            arrayConvertido = Array.CreateInstance(tipoArrayEsperado, valorArray.Length);
+
+            for (int indice = 0; indice < valorArray.Length; indice++)
+            {
+               // Convertir cada elemento del array al tipo de elemento esperado
+               arrayConvertido.SetValue(Convert.ChangeType(valorArray.GetValue(indice), tipoArrayEsperado), indice);
+            }
+         }
+
+         // Devuelve el array con el tipo adecuado
+         return arrayConvertido;
       }
    }
 }
