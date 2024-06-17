@@ -2,7 +2,7 @@
 
 namespace ModeloVehiculos
 {
-   public enum Tipo : byte { Turismo, Motocicleta, Motocarro, TraccionAnimal, Autobus, Tractocamion, Tractor, Mixto, Remolque }
+   public enum TipoVehi : byte { Turismo, Motocicleta, Motocarro, TraccionAnimal, Autobus, Tractocamion, Tractor, Mixto, Remolque }
 
    public class Vehiculo
    {
@@ -18,7 +18,7 @@ namespace ModeloVehiculos
       private const int MIN_MATRICULA = 7;
 
       // Cadenas restantes
-      private const int MAX_CADENA = 80;
+      private const int MAX_CADENA = 50;
       private const int MIN_CADENA = 2;
 
       #endregion
@@ -35,27 +35,28 @@ namespace ModeloVehiculos
       // Datos
       private string _marca;
       private string _modelo;
-      private Tipo _tipo;
+      private TipoVehi _tipo;
       private Cliente _propietario;
       #endregion
 
       // CONSTRUCTORES
       #region CONSTRUCTORES
       // PK
-      public Vehiculo(string numbastidor, Cliente propietario)
+      public Vehiculo(string numBastidor, Cliente propietario)
       {
-         NumBastidor = numbastidor;
+         NumBastidor = numBastidor;
          Propietario = propietario;
       }
 
       // Completo
-      public Vehiculo(string numBastidor, string matricula, string marca, string modelo, Tipo tipo, Cliente propietario)
-         : this(numBastidor,propietario)
+      public Vehiculo(string numBastidor, string matricula, string marca, string modelo, string tipo, Cliente propietario)
+         : this(numBastidor, propietario)
       {
          Matricula = matricula;
          Marca = marca;
          Modelo = modelo;
-         Tipo = tipo;
+         // https://stackoverflow.com/questions/6213478/how-to-get-the-enum-index-value-in-c-sharp
+         Tipo = (TipoVehi)Array.IndexOf(Enum.GetNames(typeof(TipoVehi)), tipo);
       }
       #endregion
 
@@ -63,23 +64,17 @@ namespace ModeloVehiculos
       #region PROPIEDADES
       public string NumBastidor
       {
-         get
-         {
-            return _numBastidor;
-         }
+         get => _numBastidor;
          set
          {
             ValidarNumBastidor(value);
-            _numBastidor = value;
+            _numBastidor = value.ToUpper();
          }
       }
 
       public string Matricula
       {
-         get
-         {
-            return _matricula;
-         }
+         get => _matricula;
          set
          {
             ValidarMatricula(value);
@@ -89,10 +84,7 @@ namespace ModeloVehiculos
 
       public string Marca
       {
-         get
-         {
-            return _marca;
-         }
+         get => _marca;
 
          set
          {
@@ -103,10 +95,7 @@ namespace ModeloVehiculos
 
       public string Modelo
       {
-         get
-         {
-            return _modelo;
-         }
+         get => _modelo;
          set
          {
             ValidarLongitudCadena(value, MAX_CADENA, MIN_CADENA);
@@ -114,24 +103,21 @@ namespace ModeloVehiculos
          }
       }
 
-      public Tipo Tipo
+      public TipoVehi Tipo
       {
-         get
-         {
-            return _tipo;
-         }
+         get => _tipo;
          set
          {
+            if (!Enum.IsDefined(typeof(TipoVehi), value))
+               throw new Exception();
+
             _tipo = value;
          }
       }
 
       public Cliente Propietario
       {
-         get
-         {
-            return _propietario;
-         }
+         get => _propietario;
          set
          {
             _propietario = value;

@@ -10,8 +10,8 @@ namespace InfoGestion
    public class Operacion
    {
       #region CONSTANTES
-      private const byte NOMBRE_MAX_LONG = 25;
-      private const byte DESCRIP_MAX_LONG = 50;
+      private const byte NOMBRE_MAX_LONG = 50;
+      private const byte DESCRIP_MAX_LONG = 80;
 
       private const string CADENA_DEF = "No establecido";
       #endregion
@@ -28,15 +28,15 @@ namespace InfoGestion
          Descripcion = CADENA_DEF;
       }
 
-      public Operacion(string nombre, string descripcion) : this (nombre)
+      public Operacion(string nombre, string descripcion) : this(nombre)
       {
          Descripcion = descripcion;
       }
       #endregion
 
       #region PROPIEDADES
-      public string Nombre 
-      { 
+      public string Nombre
+      {
          get => _nombre;
          set
          {
@@ -45,8 +45,8 @@ namespace InfoGestion
          }
       }
 
-      public string Descripcion 
-      { 
+      public string Descripcion
+      {
          get => _descripcion;
          set
          {
@@ -79,7 +79,7 @@ namespace InfoGestion
          try
          {
             // Descripcion no puede ser null
-            descripcionValidar = CompDatos.ValidarValorEntrada(descripcionValidar);
+            //descripcionValidar = CompDatos.ValidarValorEntrada(descripcionValidar);
 
             // Limite de caracteres no puede superiro el limite establecido
             CompDatos.ValidarLimiteCaracteres(descripcionValidar, null, DESCRIP_MAX_LONG);

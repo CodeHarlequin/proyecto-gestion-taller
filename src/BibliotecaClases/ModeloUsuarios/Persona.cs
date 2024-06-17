@@ -44,7 +44,7 @@ namespace Usuarios
          set
          {
             ValidarDni(value);
-            _dni = value;
+            _dni = value.ToUpper();
          }
       }
 

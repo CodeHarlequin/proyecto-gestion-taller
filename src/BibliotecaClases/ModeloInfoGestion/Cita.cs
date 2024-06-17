@@ -4,151 +4,87 @@ using Usuarios;
 
 namespace ModeloInfoGestion
 {
-   public class Cita
-   {
-      public enum Estado { Pendiente, Confirmada }
+    public class Cita
+    {
+        #region CONSTANTES
+        private const int DESCRIPCION_MAX = 300;
+        #endregion
 
-      #region CONSTANTES
-      private const byte CODIGO_MIN_LONG = 5;
-      #endregion
+        #region MIEMBROS
+        private DateTime _fechaMasHora;
 
-      #region MIEMBROS
-      private string _codigoIdentificacion;
-      private DateTime _fechaMasHora;
+        // Datos complentacion de la cita
+        private string _descripcion;
 
-      // Datos complentacion de la cita
-      private float _presupuesto;
-      private string _descripcion;
-      private Estado _estadoCita;
+        // Datos de indentificacion de los objetos implicados
+        private Cliente _solicitante;
+        private Vehiculo _vehiculoReparar;
+        #endregion
 
-      // Datos de indentificacion de los objetos implicados
-      private Cliente _solicitante;
-      private Vehiculo _vehiculoReparar;
-      #endregion
+        #region CONSTRUCTORES
+        public Cita(DateTime fecha, TimeSpan hora, string descripcion, Cliente solicitante, Vehiculo vehiculo)
+        {
+            FechaMasHora = fecha + hora;
+            Solicitante = solicitante;
+            VehiculoReparar = vehiculo;
+            Descripcion = descripcion;
+        }
 
-      #region CONSTRUCTORES
-      public Cita(DateTime FechaHora, string descripcionGeneral, Cliente solicitante, Vehiculo vehiculo)
-      {
-         FechaMasHora = FechaHora;
-         Descripcion = descripcionGeneral;
-         Solicitante = solicitante;
-         VehiculoReparar = vehiculo;
-         EstadoCita = Estado.Confirmada;
-      }
-      #endregion
+        #endregion
 
-      #region PROPIEDADES
-      public string CodigoIdentificacion
-      {
-         get => _codigoIdentificacion;
-         set
-         {
-            ValidarCodigoIdentificacion(value);
-            _codigoIdentificacion = value;
-         }
-      }
+        #region PROPIEDADES
+        public DateTime FechaMasHora
+        {
+            get => _fechaMasHora;
+            set => _fechaMasHora = value;
+        }
 
-      public DateTime FechaMasHora 
-      { 
-         get => _fechaMasHora;
-         set
-         {
-            ValidarFecha(value);
-            _fechaMasHora = value;
-         }
-      }
+        public Cliente Solicitante
+        {
+            get => _solicitante;
+            set => _solicitante = value;
+        }
 
-      public float Presupuesto 
-      { 
-         get => _presupuesto;
-         set
-         {
-            ValidarPresupuesto(value);
-            _presupuesto = value;
-         }
-      }
+        public string Descripcion
+        {
+            get => _descripcion;
+            set
+            {
+                _descripcion = ValidarDescripcion(value);
+            }
+        }
 
-      public Cliente Solicitante 
-      { 
-         get => _solicitante; 
-         set => _solicitante = value; 
-      }
+        public Vehiculo VehiculoReparar
+        {
+            get => _vehiculoReparar;
+            set => _vehiculoReparar = value;
+        }
+        #endregion
 
-      public string Descripcion 
-      { 
-         get => _descripcion; 
-         set => _descripcion = value; 
-      }
+        #region METODOS
 
-      public Vehiculo VehiculoReparar 
-      { 
-         get => _vehiculoReparar; 
-         set => _vehiculoReparar = value; 
-      }
 
-      public Estado EstadoCita 
-      {
-         get => _estadoCita; 
-         set => _estadoCita = value; 
-      }
-      #endregion
+        /// <returns>Devuelve la cadena sin espacios inecesarios</returns>
+        private static string ValidarDescripcion(string cadena)
+        {
+            // Preparación de la cadena
+            cadena = cadena.Trim();
 
-      #region METODOS
-      private static void ValidarCodigoIdentificacion(string codigoValidar)
-      {
-         try
-         {
-            // Validar si el valor es nulo
-            codigoValidar = CompDatos.ValidarValorEntrada(codigoValidar);
+            // Validación del rango maximo de la descripción
+            if (cadena.Length > DESCRIPCION_MAX) throw new DescripcionErroneaException($"La descripción es mayor al rango máximo, (0 - {DESCRIPCION_MAX})");
 
-            // Validar limite de caracteres
-            CompDatos.ValidarLimiteCaracteres(codigoValidar, CODIGO_MIN_LONG, CODIGO_MIN_LONG);
-         }
-         catch (Exception errorCap)
-         {
-            throw new CodigoInvalidoException(errorCap.Message);
-         }
-      }
+            return cadena;
+        }
 
-      private static void ValidarFecha(DateTime fechaValidar)
-      {
-         try
-         {
-            // Validar que la fecha se a mayor a la actual
-            if (fechaValidar < DateTime.Now)
-               throw new Exception("Inferior al la fecha actual");
-         }
-         catch (Exception errorCap)
-         {
-            throw new FechaInvalidaException(errorCap.Message);
-         }
-      }
+        #endregion
+    }
 
-      private static void ValidarPresupuesto(float presupuestoValidar)
-      {
-         try
-         {
-            // Validar que no sea negativo
-            if (presupuestoValidar < 0)
-               throw new OverflowException("No puede contener un valor negativo");
-         }
-         catch (Exception errorCap)
-         {
-            throw new PresupuestoInvalidaException(errorCap.Message);
-         }
-      }
-      #endregion
-   }
+    #region EXCEPCIONES PERSONALIZADAS
+    public class DescripcionErroneaException : Exception
+    {
+        public DescripcionErroneaException() : base("El formato de la descripción es incorrecta.") { }
+        public DescripcionErroneaException(string message) : base(message) { }
+    }
 
-   #region EXCEPCIONES PERSONALIZADAS
-   public class FechaInvalidaException : Exception
-   {
-      public FechaInvalidaException(string mensajeError) : base($"Fecha:  {mensajeError}") { }
-   }
-
-   public class PresupuestoInvalidaException : Exception
-   {
-      public PresupuestoInvalidaException(string mensajeError) : base($"Presupuesto:  {mensajeError}") { }
-   }
-   #endregion
+    #endregion
 }
