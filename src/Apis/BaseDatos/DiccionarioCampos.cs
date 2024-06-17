@@ -84,9 +84,9 @@ namespace BaseDatos
 
       private static Dictionary<string, string> camposTablaReservas = new Dictionary<string, string>
       {
-         { "presupuesto" , "fPresupuesto" },
          { "fecha", "dFecha"},
          { "hora", "tHora" },
+         { "descripcion", "vDescripcion" },
          { "solicitante", "cDni_Cliente" },
          { "vehiculo", "cNBastidor"}
       };
