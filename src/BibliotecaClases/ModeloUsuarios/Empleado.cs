@@ -7,20 +7,17 @@ using System.Threading.Tasks;
 namespace Usuarios
 {
    #region ENUMERACIÓN
-   /// <summary>
-   /// Enumeración para el tipo de usuario del taller
-   /// </summary>
-   public enum TipoCargo : byte { Jeje, Mecanico };
+
    #endregion
 
    public class Empleado : Persona
    {
       #region CONSTANTES
-      private const TipoCargo USUARIO_DEF = TipoCargo.Mecanico;
       #endregion
 
       #region MIEMBROS
-      TipoCargo _cargoDesempeniar;
+      //TipoCargo _cargoDesempeniar;
+      string _especialidad;
       #endregion
 
       #region CONSTRUCTORES
@@ -31,7 +28,7 @@ namespace Usuarios
       /// <param name="contrasenia">Contraseña del Usuario</param>
       public Empleado(string dni, string contrasenia) : base(dni, contrasenia)
       {
-         _cargoDesempeniar = USUARIO_DEF;
+         //_cargoDesempeniar = USUARIO_DEF;
       }
 
       /// <summary>
@@ -43,21 +40,22 @@ namespace Usuarios
       /// <param name="telefono">Teléfono del Usuario</param>
       /// <param name="contrasenia">Contraseña del Usuario</param>
       /// <param name="tipoCargo">Tipo de Usuario</param>
-      public Empleado(string dni, string nombre, string apellidos, string telefono, string contrasenia, TipoCargo tipoCargo) 
+      public Empleado(string dni, string nombre, string apellidos, string telefono, string contrasenia, string especialidad)
          : base(dni, nombre, apellidos, telefono, contrasenia)
       {
-         Cargo = tipoCargo;
+         //Cargo = tipoCargo;
+         Especialidad = especialidad;
+
       }
       #endregion
 
       #region PROPIEDADES
-      /// <summary>
-      /// Tipo de Usuario del Taller
-      /// </summary>
-      public TipoCargo Cargo
+     
+
+      public string Especialidad
       {
-         get => _cargoDesempeniar;
-         set => _cargoDesempeniar = value;
+         get => _especialidad;
+         set => _especialidad = value;
       }
       #endregion
    }
