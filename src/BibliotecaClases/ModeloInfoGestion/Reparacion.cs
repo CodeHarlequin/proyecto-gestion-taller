@@ -10,15 +10,20 @@ namespace InfoGestion
 {
    public class Reparacion
    {
-      public enum Estado { Activa, Finalizada }
+      /*
+       * Diagnostico - Al crear una una reparacion
+       * Cotizacion - El propietario evalua un precio a la reparacion
+       * Aprobacion_Cliente - El cliente esta de acuerdo con la reparacion a realizar
+       * Reparacion
+       * Completado
+       */
+      public enum Estado { Diagnostico, Cotizacion, Aprobacion_Cliente, Reparacion, Completado }
 
       #region CONSTANTES
-      private const byte CODIGO_MIN_LONG = 5;
-      private const Estado ESTADO_DEF = Estado.Activa;
       #endregion
 
       #region MIEMBROS
-      private string _codigoIdentificacion;
+      private int _codigoRep;
 
       // Datos para indentificar a los responsables involucrados      
       private Vehiculo _vehiculoImplicado;
@@ -29,134 +34,117 @@ namespace InfoGestion
       private Estado _estadoRep;
       private Operacion[] _listaOperaciones;
       private string _infoAdicional;
+      private float _presupuesto;
 
       // Fecha para idicar el inicio y el fin
-      private DateTime _fechaInicio;
-      private DateTime _fechaFin;
+      private DateTime? _fechaInicio;
+      private DateTime? _fechaFin;
       #endregion
 
       #region CONSTRUCTORES
-      public Reparacion(string codigo, Vehiculo vehiculo)
+      // Utilizara para asignar personar a la reparacion
+      public Reparacion(Vehiculo vehiculo, Empleado jefe, Empleado[] mecanicosEncargados)
       {
-         CodigoIdentificacion = codigo;
          VehiculoImplicado = vehiculo;
-         _estadoRep = ESTADO_DEF;
-      }
-
-      public Reparacion(string codigo, Vehiculo vehiculo, Operacion[] operaciones, string descripcion)
-         : this(codigo, vehiculo)
-      {
-         ListaOperaciones = operaciones;
-         InformacionAdicional = descripcion;
-      }
-
-      public Reparacion(string codigo, Vehiculo vehiculo, Empleado jefe, Empleado[] mecanicosEncargados, string descripcion)
-         : this (codigo, vehiculo)
-      {
          JefeMecanico = jefe;
          ListaMecanicos = mecanicosEncargados;
-         InformacionAdicional = descripcion;
       }
+
+      // Utilizara al modificar una reparacion
+      public Reparacion(Vehiculo vehiculo, Operacion[] operaciones, string infoAdicional)
+      {
+         VehiculoImplicado = vehiculo;
+         ListaOperaciones = operaciones;
+         InformacionAdicional = infoAdicional;
+      }
+
+      // Utilizado para optener toda la informacion de la reparaciones
+      public Reparacion(int codigoRep, Vehiculo vehiculo, DateTime fechaInicio, DateTime fechaFin, Operacion[] operaciones, string estado, string infoAdicional, float presupuesto)
+         : this(vehiculo, operaciones, infoAdicional)
+      {
+         Presupuesto = presupuesto;
+         CodigoRep = codigoRep;
+         FechaInicio = fechaInicio;
+         FechaFin = fechaFin;
+         EstadoRep = (Estado)Array.IndexOf(Enum.GetNames(typeof(Estado)), estado);
+      }
+
       #endregion
 
       #region PROPIEDADES
-      public string CodigoIdentificacion 
-      { 
-         get => _codigoIdentificacion;
-         set
-         {
-            ValidarCodigoIdentificacion(value);
-            _codigoIdentificacion = value;
-         }
+      public int CodigoRep
+      {
+         get => _codigoRep;
+         set => _codigoRep = value;
       }
 
-      public Vehiculo VehiculoImplicado 
-      { 
-         get => _vehiculoImplicado; 
-         set => _vehiculoImplicado = value; 
+      public Vehiculo VehiculoImplicado
+      {
+         get => _vehiculoImplicado;
+         set => _vehiculoImplicado = value;
       }
 
-      public Empleado JefeMecanico 
-      { 
-         get => _jefeMecanico; 
-         set => _jefeMecanico = value; 
+      public Empleado JefeMecanico
+      {
+         get => _jefeMecanico;
+         set => _jefeMecanico = value;
       }
 
       public Empleado[] ListaMecanicos
-      { 
-         get => _listaMecanicos; 
-         set => _listaMecanicos = value; 
+      {
+         get => _listaMecanicos;
+         set => _listaMecanicos = value;
+      }
+
+      public DateTime? FechaInicio
+      {
+         get => _fechaInicio;
+         set => _fechaInicio = value;
+      }
+
+      public DateTime? FechaFin
+      {
+         get => _fechaFin;
+         set => _fechaFin = value;
       }
 
       public Estado EstadoRep
       {
          get => _estadoRep;
-         set => _estadoRep = value;
-      }
-
-      public Operacion[] ListaOperaciones 
-      { 
-         get => _listaOperaciones; 
-         set => _listaOperaciones = value; 
-      }
-
-      public string InformacionAdicional 
-      { 
-         get => _infoAdicional; 
-         set => _infoAdicional = value; 
-      }
-      
-      public DateTime FechaInicio 
-      { 
-         get => _fechaInicio;
          set
          {
-            ValidarFecha(value);
-            _fechaInicio = value;
+            if (!Enum.IsDefined(typeof(Estado), value))
+               throw new Exception();
+
+            _estadoRep = value;
          }
       }
 
-      public DateTime FechaFin 
-      { 
-         get => _fechaFin;
-         set
-         {
-            ValidarFecha(value);
-            _fechaFin = value;
-         }
+      public Operacion[] ListaOperaciones
+      {
+         get => _listaOperaciones;
+         set => _listaOperaciones = value;
+      }
+
+      public string InformacionAdicional
+      {
+         get => _infoAdicional;
+         set => _infoAdicional = value;
+      }
+
+      public float Presupuesto
+      {
+         get => _presupuesto;
+         set => _presupuesto = value;
       }
       #endregion
 
       #region METODOS
-      private static void ValidarCodigoIdentificacion(string codigoValidar)
-      {
-         try
-         {
-            // Validar si el valor es nulo
-            codigoValidar = CompDatos.ValidarValorEntrada(codigoValidar);
+      //public override string ToString()
+      //{
+      //   return $"{FechaInicio}, {FechaFin}, {Presu}"
+      //}
 
-            // Validar limite de caracteres
-            CompDatos.ValidarLimiteCaracteres(codigoValidar, CODIGO_MIN_LONG, CODIGO_MIN_LONG);
-         }
-         catch (Exception errorCap) 
-         {
-            throw new CodigoInvalidoException(errorCap.Message);
-         }
-      }
-
-      private static void ValidarFecha(DateTime fechaValidar)
-      {
-         try
-         {
-            // Validar que la fecha se a mayor a la actual
-            if (fechaValidar < DateTime.Now)
-               throw new Exception("Inferior al la fecha actual");
-         }
-         catch (Exception errorCap)
-         {
-            throw new FechaInvalidaException(errorCap.Message);
-         }
-      }
       #endregion
    }
 
@@ -164,11 +152,6 @@ namespace InfoGestion
    public class CodigoInvalidoException : Exception
    {
       public CodigoInvalidoException(string mensajeError) : base($"Codigo:  {mensajeError}") { }
-   }
-
-   public class FechaInvalidaException : Exception
-   {
-      public FechaInvalidaException(string mensajeError) : base($"Fecha:  {mensajeError}") { }
    }
    #endregion
 }
