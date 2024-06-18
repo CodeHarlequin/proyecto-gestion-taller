@@ -149,37 +149,29 @@ namespace BaseDatos
       private static object? ConstruirObjeto(DataRow filaDatos)
       {
          // Recursos locales
-         object? objetoDevolver = null;
-         Type tipoObjetoDevolver = null;
+         object? objetoDevolver;
+         Type tipoObjetoDevolver;
          string nombreTabla;
+         Dictionary<string, Type> dTiposObj;
 
          // Inializacion
          nombreTabla = filaDatos.Table.TableName;
 
          // Se crea una instacia de una de las clases dependiendo del nombre indicado
-         switch (nombreTabla)
+         dTiposObj = new Dictionary<string, Type>
          {
-            case "Clientes":
-               tipoObjetoDevolver = typeof(Cliente);
-               break;
-            case "Mecanicos":
-               tipoObjetoDevolver = typeof(Empleado);
-               break;
-            case "Vehiculos":
-               tipoObjetoDevolver = typeof(Vehiculo);
-               break;
-            case "Reservas":
-               tipoObjetoDevolver = typeof(Cita);
-               break;
-            case "Reparaciones":
-               tipoObjetoDevolver = typeof(Reparacion);
-               break;
-            case "Operaciones":
-               tipoObjetoDevolver = typeof(Operacion);
-               break;
-         }
+            { "Clientes", typeof(Cliente) },
+            { "Mecanicos", typeof(Empleado) },
+            { "Vehiculos", typeof(Vehiculo) },
+            { "Reservas", typeof(Cita) },
+            { "Reparaciones", typeof(Reparacion) },
+            { "Operaciones", typeof(Operacion) }
+         };
 
-         //objetoDevolver = CreacionObjetos.CrearInstancia<Empleado>(filaDatos);
+         // Optiene el tipo de intancia
+         tipoObjetoDevolver = dTiposObj.GetValueOrDefault(nombreTabla);
+
+         // Creara la instacia acorde al tipo de objeto
          objetoDevolver = CreacionObjetos.CrearInstancia(tipoObjetoDevolver, filaDatos);
 
          // Devolver objeto creado
