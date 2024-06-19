@@ -1,4 +1,5 @@
 ﻿using BaseDatos;
+using GestConfTaller;
 using Usuarios;
 
 namespace InicioSesion
@@ -25,6 +26,26 @@ namespace InicioSesion
 
          }
          // En caso de devolver un array vacio no esposible acceder a la posicion 0 significara que el usuario no existe
+         catch (Exception error) // La deteccion de otro error 
+         {
+            throw new Exception($"Login:{error.Message}");
+         }
+      }
+
+      public static void LoginEspacial(Propietario propietarioValidar)
+      {
+         // Recursos locales
+         Propietario propietarioOriginal;
+
+         try
+         {
+            // Optener propietario original
+            propietarioOriginal = DatosPropietario.OptenePropietario();
+
+            // Validamos lso valores
+            if ((propietarioValidar.Contrasenia != propietarioOriginal.Contrasenia) && (propietarioValidar.Dni != propietarioOriginal.Dni))
+               throw new CredencialesIncorrectasException();
+         }
          catch (Exception error) // La deteccion de otro error 
          {
             throw new Exception($"Login:{error.Message}");
@@ -59,5 +80,10 @@ namespace InicioSesion
    public class ContraseniaIncorrectaException : Exception
    {
       public ContraseniaIncorrectaException() : base("La contrasela es incorrecta") { }
+   }
+
+   public class CredencialesIncorrectasException : Exception
+   {
+      public CredencialesIncorrectasException() : base("La contrasela o el usuario no son correctos") { }
    }
 }

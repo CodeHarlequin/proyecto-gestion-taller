@@ -7,8 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BaseDatos\BaseDatos.csproj" />
-    <ProjectReference Include="..\GestConfTaller\GestConfTaller.csproj" />
+    <ProjectReference Include="..\..\BibliotecaClases\ModeloUsuarios\Usuarios.csproj" />
   </ItemGroup>
 
 </Project>
