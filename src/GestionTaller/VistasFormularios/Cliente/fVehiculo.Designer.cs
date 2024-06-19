@@ -28,161 +28,175 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.infoError = new System.Windows.Forms.ErrorProvider(this.components);
-            this.tbContrasenia = new System.Windows.Forms.TextBox();
-            this.lMatricula = new System.Windows.Forms.Label();
-            this.tbNBastidor = new System.Windows.Forms.TextBox();
-            this.lNBastidor = new System.Windows.Forms.Label();
-            this.lVehiculo = new System.Windows.Forms.Label();
-            this.tbMarca = new System.Windows.Forms.TextBox();
-            this.lMarca = new System.Windows.Forms.Label();
-            this.tbModelo = new System.Windows.Forms.TextBox();
-            this.lModelo = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cbTipoVehiculo = new System.Windows.Forms.ComboBox();
-            this.bGuardar = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.infoError)).BeginInit();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            infoError = new ErrorProvider(components);
+            tbMatricula = new TextBox();
+            lMatricula = new Label();
+            tbNBastidor = new TextBox();
+            lNBastidor = new Label();
+            lVehiculo = new Label();
+            tbMarca = new TextBox();
+            lMarca = new Label();
+            tbModelo = new TextBox();
+            lModelo = new Label();
+            label1 = new Label();
+            cbTipoVehiculo = new ComboBox();
+            bGuardar = new Button();
+            ((System.ComponentModel.ISupportInitialize)infoError).BeginInit();
+            SuspendLayout();
             // 
             // infoError
             // 
-            this.infoError.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
-            this.infoError.ContainerControl = this;
+            infoError.BlinkStyle = ErrorBlinkStyle.NeverBlink;
+            infoError.ContainerControl = this;
             // 
-            // tbContrasenia
+            // tbMatricula
             // 
-            this.tbContrasenia.Location = new System.Drawing.Point(142, 109);
-            this.tbContrasenia.MaxLength = 8;
-            this.tbContrasenia.Name = "tbContrasenia";
-            this.tbContrasenia.Size = new System.Drawing.Size(181, 20);
-            this.tbContrasenia.TabIndex = 4;
+            tbMatricula.Location = new Point(166, 126);
+            tbMatricula.Margin = new Padding(4, 3, 4, 3);
+            tbMatricula.MaxLength = 8;
+            tbMatricula.Name = "tbMatricula";
+            tbMatricula.Size = new Size(210, 23);
+            tbMatricula.TabIndex = 4;
             // 
             // lMatricula
             // 
-            this.lMatricula.AutoSize = true;
-            this.lMatricula.Location = new System.Drawing.Point(81, 112);
-            this.lMatricula.Name = "lMatricula";
-            this.lMatricula.Size = new System.Drawing.Size(55, 13);
-            this.lMatricula.TabIndex = 3;
-            this.lMatricula.Text = "Matrícula:";
+            lMatricula.AutoSize = true;
+            lMatricula.Location = new Point(94, 129);
+            lMatricula.Margin = new Padding(4, 0, 4, 0);
+            lMatricula.Name = "lMatricula";
+            lMatricula.Size = new Size(60, 15);
+            lMatricula.TabIndex = 3;
+            lMatricula.Text = "Matrícula:";
             // 
             // tbNBastidor
             // 
-            this.tbNBastidor.Location = new System.Drawing.Point(142, 69);
-            this.tbNBastidor.MaxLength = 17;
-            this.tbNBastidor.Name = "tbNBastidor";
-            this.tbNBastidor.Size = new System.Drawing.Size(181, 20);
-            this.tbNBastidor.TabIndex = 2;
+            tbNBastidor.Location = new Point(166, 80);
+            tbNBastidor.Margin = new Padding(4, 3, 4, 3);
+            tbNBastidor.MaxLength = 17;
+            tbNBastidor.Name = "tbNBastidor";
+            tbNBastidor.Size = new Size(210, 23);
+            tbNBastidor.TabIndex = 2;
             // 
             // lNBastidor
             // 
-            this.lNBastidor.AutoSize = true;
-            this.lNBastidor.Location = new System.Drawing.Point(35, 72);
-            this.lNBastidor.Name = "lNBastidor";
-            this.lNBastidor.Size = new System.Drawing.Size(102, 13);
-            this.lNBastidor.TabIndex = 1;
-            this.lNBastidor.Text = "Número de bastidor:";
+            lNBastidor.AutoSize = true;
+            lNBastidor.Location = new Point(41, 83);
+            lNBastidor.Margin = new Padding(4, 0, 4, 0);
+            lNBastidor.Name = "lNBastidor";
+            lNBastidor.Size = new Size(116, 15);
+            lNBastidor.TabIndex = 1;
+            lNBastidor.Text = "Número de bastidor:";
             // 
             // lVehiculo
             // 
-            this.lVehiculo.AutoSize = true;
-            this.lVehiculo.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lVehiculo.Location = new System.Drawing.Point(29, 21);
-            this.lVehiculo.Name = "lVehiculo";
-            this.lVehiculo.Size = new System.Drawing.Size(294, 22);
-            this.lVehiculo.TabIndex = 0;
-            this.lVehiculo.Text = "Introduzca los datos de su vehículo:";
+            lVehiculo.AutoSize = true;
+            lVehiculo.Font = new Font("Microsoft Sans Serif", 13F, FontStyle.Regular, GraphicsUnit.Point);
+            lVehiculo.Location = new Point(34, 24);
+            lVehiculo.Margin = new Padding(4, 0, 4, 0);
+            lVehiculo.Name = "lVehiculo";
+            lVehiculo.Size = new Size(294, 22);
+            lVehiculo.TabIndex = 0;
+            lVehiculo.Text = "Introduzca los datos de su vehículo:";
             // 
             // tbMarca
             // 
-            this.tbMarca.Location = new System.Drawing.Point(142, 147);
-            this.tbMarca.MaxLength = 50;
-            this.tbMarca.Name = "tbMarca";
-            this.tbMarca.Size = new System.Drawing.Size(181, 20);
-            this.tbMarca.TabIndex = 6;
+            tbMarca.Location = new Point(166, 170);
+            tbMarca.Margin = new Padding(4, 3, 4, 3);
+            tbMarca.MaxLength = 50;
+            tbMarca.Name = "tbMarca";
+            tbMarca.Size = new Size(210, 23);
+            tbMarca.TabIndex = 6;
             // 
             // lMarca
             // 
-            this.lMarca.AutoSize = true;
-            this.lMarca.Location = new System.Drawing.Point(96, 150);
-            this.lMarca.Name = "lMarca";
-            this.lMarca.Size = new System.Drawing.Size(40, 13);
-            this.lMarca.TabIndex = 5;
-            this.lMarca.Text = "Marca:";
+            lMarca.AutoSize = true;
+            lMarca.Location = new Point(112, 173);
+            lMarca.Margin = new Padding(4, 0, 4, 0);
+            lMarca.Name = "lMarca";
+            lMarca.Size = new Size(43, 15);
+            lMarca.TabIndex = 5;
+            lMarca.Text = "Marca:";
             // 
             // tbModelo
             // 
-            this.tbModelo.Location = new System.Drawing.Point(142, 184);
-            this.tbModelo.MaxLength = 50;
-            this.tbModelo.Name = "tbModelo";
-            this.tbModelo.Size = new System.Drawing.Size(181, 20);
-            this.tbModelo.TabIndex = 8;
+            tbModelo.Location = new Point(166, 212);
+            tbModelo.Margin = new Padding(4, 3, 4, 3);
+            tbModelo.MaxLength = 50;
+            tbModelo.Name = "tbModelo";
+            tbModelo.Size = new Size(210, 23);
+            tbModelo.TabIndex = 8;
             // 
             // lModelo
             // 
-            this.lModelo.AutoSize = true;
-            this.lModelo.Location = new System.Drawing.Point(91, 187);
-            this.lModelo.Name = "lModelo";
-            this.lModelo.Size = new System.Drawing.Size(45, 13);
-            this.lModelo.TabIndex = 7;
-            this.lModelo.Text = "Modelo:";
+            lModelo.AutoSize = true;
+            lModelo.Location = new Point(106, 216);
+            lModelo.Margin = new Padding(4, 0, 4, 0);
+            lModelo.Name = "lModelo";
+            lModelo.Size = new Size(51, 15);
+            lModelo.TabIndex = 7;
+            lModelo.Text = "Modelo:";
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(45, 227);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 13);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Tipo de vehículo:";
+            label1.AutoSize = true;
+            label1.Location = new Point(52, 262);
+            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(97, 15);
+            label1.TabIndex = 9;
+            label1.Text = "Tipo de vehículo:";
             // 
             // cbTipoVehiculo
             // 
-            this.cbTipoVehiculo.FormattingEnabled = true;
-            this.cbTipoVehiculo.Location = new System.Drawing.Point(142, 224);
-            this.cbTipoVehiculo.Name = "cbTipoVehiculo";
-            this.cbTipoVehiculo.Size = new System.Drawing.Size(181, 21);
-            this.cbTipoVehiculo.TabIndex = 10;
+            cbTipoVehiculo.FormattingEnabled = true;
+            cbTipoVehiculo.Location = new Point(166, 258);
+            cbTipoVehiculo.Margin = new Padding(4, 3, 4, 3);
+            cbTipoVehiculo.Name = "cbTipoVehiculo";
+            cbTipoVehiculo.Size = new Size(210, 23);
+            cbTipoVehiculo.TabIndex = 10;
             // 
             // bGuardar
             // 
-            this.bGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bGuardar.Location = new System.Drawing.Point(33, 274);
-            this.bGuardar.Name = "bGuardar";
-            this.bGuardar.Size = new System.Drawing.Size(290, 32);
-            this.bGuardar.TabIndex = 11;
-            this.bGuardar.Text = "Guardar";
-            this.bGuardar.UseVisualStyleBackColor = true;
+            bGuardar.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            bGuardar.Location = new Point(38, 316);
+            bGuardar.Margin = new Padding(4, 3, 4, 3);
+            bGuardar.Name = "bGuardar";
+            bGuardar.Size = new Size(338, 37);
+            bGuardar.TabIndex = 11;
+            bGuardar.Text = "Guardar";
+            bGuardar.UseVisualStyleBackColor = true;
+            bGuardar.Click += bGuardar_Click;
             // 
             // fVehiculo
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(356, 329);
-            this.Controls.Add(this.bGuardar);
-            this.Controls.Add(this.cbTipoVehiculo);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.tbModelo);
-            this.Controls.Add(this.lModelo);
-            this.Controls.Add(this.tbMarca);
-            this.Controls.Add(this.lMarca);
-            this.Controls.Add(this.lVehiculo);
-            this.Controls.Add(this.tbContrasenia);
-            this.Controls.Add(this.lMatricula);
-            this.Controls.Add(this.tbNBastidor);
-            this.Controls.Add(this.lNBastidor);
-            this.Name = "fVehiculo";
-            this.Text = "Taller: Registrar Vehículo";
-            ((System.ComponentModel.ISupportInitialize)(this.infoError)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(415, 380);
+            Controls.Add(bGuardar);
+            Controls.Add(cbTipoVehiculo);
+            Controls.Add(label1);
+            Controls.Add(tbModelo);
+            Controls.Add(lModelo);
+            Controls.Add(tbMarca);
+            Controls.Add(lMarca);
+            Controls.Add(lVehiculo);
+            Controls.Add(tbMatricula);
+            Controls.Add(lMatricula);
+            Controls.Add(tbNBastidor);
+            Controls.Add(lNBastidor);
+            Margin = new Padding(4, 3, 4, 3);
+            Name = "fVehiculo";
+            Text = "Taller: Registrar Vehículo";
+            Load += fVehiculo_Load;
+            ((System.ComponentModel.ISupportInitialize)infoError).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
         private System.Windows.Forms.ErrorProvider infoError;
-        private System.Windows.Forms.TextBox tbContrasenia;
+        private System.Windows.Forms.TextBox tbMatricula;
         private System.Windows.Forms.Label lMatricula;
         private System.Windows.Forms.TextBox tbNBastidor;
         private System.Windows.Forms.Label lNBastidor;
