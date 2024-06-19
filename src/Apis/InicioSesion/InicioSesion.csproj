@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BaseDatos\BaseDatos.csproj" />
+    <ProjectReference Include="..\GestConfTaller\GestConfTaller.csproj" />
   </ItemGroup>
 
 </Project>
