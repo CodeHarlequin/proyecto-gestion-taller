@@ -2,6 +2,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
+
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestionTaller", "src\GestionTaller\GestionTaller.csproj", "{321A942F-065E-4DE7-A745-1FE906D3298F}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Controladores", "Controladores", "{21DE51F8-488A-4740-87FE-9E2F15296765}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseDatos", "src\Apis\BaseDatos\BaseDatos.csproj", "{3426FC6E-6789-4915-A38B-4A7F63DC46A3}"
@@ -18,12 +21,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InicioSesion", "src\Apis\In
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestConfTaller", "src\Apis\GestConfTaller\GestConfTaller.csproj", "{0AAA4CF2-05AC-47BF-A3E1-211A3EDD327A}"
 EndProject
+
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{321A942F-065E-4DE7-A745-1FE906D3298F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{321A942F-065E-4DE7-A745-1FE906D3298F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{321A942F-065E-4DE7-A745-1FE906D3298F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{321A942F-065E-4DE7-A745-1FE906D3298F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3426FC6E-6789-4915-A38B-4A7F63DC46A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3426FC6E-6789-4915-A38B-4A7F63DC46A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3426FC6E-6789-4915-A38B-4A7F63DC46A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
