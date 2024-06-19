@@ -43,7 +43,7 @@ namespace InicioSesion
             propietarioOriginal = DatosPropietario.OptenePropietario();
 
             // Validamos lso valores
-            if ((propietarioValidar.Contrasenia != propietarioOriginal.Contrasenia) && (propietarioValidar.Dni != propietarioOriginal.Dni))
+            if ((propietarioValidar.Contrasenia != propietarioOriginal.Contrasenia) && (propietarioValidar.Usuario != propietarioOriginal.Usuario))
                throw new CredencialesIncorrectasException();
          }
          catch (Exception error) // La deteccion de otro error 
