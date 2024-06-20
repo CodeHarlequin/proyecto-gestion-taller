@@ -18,10 +18,7 @@ namespace GestionTaller
 {
     public partial class fVehiculo : Form
     {
-        public fVehiculo()
-        {
-            InitializeComponent();
-        }
+
 
         #region Miembros y Constructores
 
@@ -43,8 +40,12 @@ namespace GestionTaller
         public fVehiculo(Cliente propietario)
         {
             Propietario = propietario;
+            InitializeComponent();
         }
-
+        public fVehiculo()
+        {
+            InitializeComponent();
+        }
         #endregion
 
         #region Controladores
@@ -57,6 +58,7 @@ namespace GestionTaller
 
             try
             {
+                // Carga el contenido del enum al CB
                 CargarCBTipo();
             }
             catch (Exception error)
@@ -79,10 +81,12 @@ namespace GestionTaller
 
             try
             {
+                // En caso de que el usuario acepte,
+                // se insertarán los datos
                 if(VentanaConfirmacion("¿Seguro que desea añadir el vehículo?") == DialogResult.Yes)
                 {
                     GuardadoDatos();
-                    MostrarMensaje($"El Vehículo del propietario {Propietario.Nombre} a sido agregado correctamente.");
+                    MostrarMensaje($"El Vehículo del propietario {Propietario.Nombre} ha sido agregado correctamente.");
                 }
 
             }
@@ -101,36 +105,23 @@ namespace GestionTaller
         #endregion
 
         #region Funcionalidades Botones y Objetos
+
         private void GuardadoDatos()
         {
-            // Recursos
-            // Definicion del cliente
-
+            // Recursos         
             // Vehiculo a guardar/Insertar
             Vehiculo NuevoVehiculo = new Vehiculo(tbNBastidor.Text, tbMatricula.Text, tbModelo.Text ,tbMarca.Text, cbTipoVehiculo.Text, Propietario);
 
             // Insercción de los datos
-
-            // Insercción
             LogicaNegocio.EjecutarInserccion
                 ("Vehiculos", 
                 NuevoVehiculo.NumBastidor, NuevoVehiculo.Matricula, NuevoVehiculo.Marca,
-                NuevoVehiculo.Modelo ,NuevoVehiculo.Tipo.ToString(), Propietario.Dni);            
-
-            
+                NuevoVehiculo.Modelo ,NuevoVehiculo.Tipo.ToString(), Propietario.Dni);                   
         }
 
-        private void LimpiarControles()
-        {
-            tbMatricula.Text = "";
-            tbMarca.Text = "";
-            tbModelo.Text = "";
-            tbNBastidor.Text = "";
-            cbTipoVehiculo.Text = "";
-        }
         #endregion
 
-        #region Cargar Datos CB
+        #region Cargar Datos CB y Modificar Valores
         // Carga CB
         public void CargarCBTipo()
         {
@@ -146,14 +137,21 @@ namespace GestionTaller
 
         }
 
+        private void LimpiarControles()
+        {
+            tbMatricula.Text = "";
+            tbMarca.Text = "";
+            tbModelo.Text = "";
+            tbNBastidor.Text = "";
+            cbTipoVehiculo.Text = "";
+        }
+
         #endregion
 
-        // TODO: Independizar
         #region UI
-        // TODO: Independizar
         public static void MostrarMensaje(string cadena)
         {
-            MessageBox.Show($"Error: {cadena}", "Notificación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"{cadena}", "Notificación", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public static void MostrarError(string error)
