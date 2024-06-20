@@ -76,9 +76,9 @@ namespace GestionTaller
             case fPresupuesto formReparacion:
                formReparacion.RepModificar = reparacionSeleccionada;
                break;
-               //case fSelectTrabajadores formMecanico:
-               //   formMecanico.RepModificar = reparacionSeleccionada;
-               //   break;
+            case fSelectTrabajadores formMecanico:
+               formMecanico.RepModificar = reparacionSeleccionada;
+               break;
          }
 
          // Mostrar formulario
