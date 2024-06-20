@@ -24,7 +24,7 @@ namespace GestionTaller.VistasFormularios.Propietario
                consultaRealizar = "SELECT * FROM Reparaciones";
                break;
             case nameof(Empleado):
-               consultaRealizar = "SELECT * FROM Mecanicos";
+               consultaRealizar = "SELECT * FROM Mecanicos"; // TODO: Definir una vista en el base de datos para eliminar el jefe por defecto
                break;
          }
 
@@ -47,6 +47,20 @@ namespace GestionTaller.VistasFormularios.Propietario
       public static void ActualizarPresupuesto(Reparacion reparacionModificar)
       {
          ApiBaseDatos.EjecutarInstruccion($"UPDATE Reparaciones SET fPresupuesto = {reparacionModificar.Presupuesto} WHERE iCodigo_Reparacion = '{reparacionModificar.CodigoRep}'");
+      }
+
+      public static void AsignarJefeReparacion(Reparacion reparacionModificar, Empleado jefeEncargado)
+      {
+         ApiBaseDatos.EjecutarInstruccion($"UPDATE Reparaciones SET cDni_JefeMecanico = {jefeEncargado.Dni} WHERE iCodigo_Reparacion = '{reparacionModificar.CodigoRep}'");
+      }
+
+      public static void AsignarEmpleadosEncargados(Reparacion repModificar, Empleado[] listaEmpleadoImplicados)
+      {
+         for (int indice = 0; indice < listaEmpleadoImplicados.Length; indice++)
+         {
+            ApiBaseDatos.EjecutarInstruccion($"INSERT INTO MecanicoReparacion(cDni_Mecanico, iCodigo_Reparacion, dFecha) " +
+               $"VALUES ('{listaEmpleadoImplicados[indice].Dni}',{repModificar.CodigoRep},{DateTime.Now}) ");
+         }
       }
    }
 }
