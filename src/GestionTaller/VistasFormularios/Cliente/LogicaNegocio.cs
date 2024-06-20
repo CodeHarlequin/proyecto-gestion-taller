@@ -1,4 +1,5 @@
 ﻿using BaseDatos;
+using ModeloVehiculos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,5 +27,43 @@ namespace GestionTaller.VistasFormularios.Cliente
             ApiBaseDatos.EjecutarInstruccion(instruccion);
         }
 
+        public static Vehiculo[] ObtenerListaVehiculos(string dni)
+        {
+            // Recursos locales 
+            string instruccion = $"SELECT * FROM Vehiculos WHERE cDni_Propietario = '{dni}'";
+
+            // Inicializar Lista
+            object[] ListaVehiculosClienteOBJ = ApiBaseDatos.OptenerListaObjetos(instruccion);
+
+            // Conversión a Cliente
+            Vehiculo[] ListaVehiculosCliente = ListaVehiculosClienteOBJ.OfType<Vehiculo>().ToArray();
+
+            return ListaVehiculosCliente;
+        }
+
+        public static Vehiculo ObtenerVehiculo(string dni, string numB)
+        {
+            string instruccion = $"SELECT * FROM Vehiculos WHERE cDni_Propietario = '{dni}' AND cNBastidor = '{numB}'";
+            // Inicializar Lista
+            object[] ListaVehiculosClienteOBJ = ApiBaseDatos.OptenerListaObjetos(instruccion);
+
+            // Conversión a Cliente
+            Vehiculo[] ListaVehiculosCliente = ListaVehiculosClienteOBJ.OfType<Vehiculo>().ToArray();
+
+            return ListaVehiculosCliente[0];
+
+        }
+
+        public static void InsertarReserva(string fecha, string hora, string descripcion, string dni, string numbastidor)
+        {
+            ApiBaseDatos.EjecutarInstruccion(
+            $"INSERT INTO Reservas " +
+            $"(dFecha, tHora, vDescripcion, cDni_Cliente, cNBastidor) VALUES " +
+            $"('{fecha}', '{hora}', '{descripcion}', '{dni}', '{numbastidor}')");
+        }
+        public static string FormatearFecha(string anio, string mes, string dia)
+        {
+            return anio + "-" + mes + "-" + dia;
+        }
     }
 }
