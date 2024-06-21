@@ -111,7 +111,7 @@ namespace GestionTaller
         /// </summary>
         private void CargarListaVehiculos()
         {
-            dgvListaVehiculos.DataSource = LogicaNegocio.ObtenerListaVehiculos(Propietario.Dni);
+            dgvListaVehiculos.DataSource = LogicaNegocio.ObtenerListaVehiculos(Propietario.Dni).ToList();
         }
 
         private void GuardarCambios()
@@ -126,7 +126,7 @@ namespace GestionTaller
             string fechaString = LogicaNegocio.FormatearFecha(dtpFecha.Value.Year.ToString(), dtpFecha.Value.Month.ToString(), dtpFecha.Value.Day.ToString());
 
             // Instanciación del objeto Vehículo seleccionado
-            Vehiculo VehiculoSeleccionado = LogicaNegocio.ObtenerVehiculo(Propietario.Dni, dgvListaVehiculos.CurrentCell.Value.ToString());
+            Vehiculo VehiculoSeleccionado = LogicaNegocio.ObtenerVehiculo(Propietario.Dni, dgvListaVehiculos.SelectedRows[0].Cells["NumBastidor"].Value.ToString());
 
             // Instanciación del Objeto Cita
             Cita NuevaCita = new Cita(fecha, hora, tbDescripcion.Text, Propietario, VehiculoSeleccionado);

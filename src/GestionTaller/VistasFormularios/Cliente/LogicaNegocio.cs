@@ -27,6 +27,11 @@ namespace GestionTaller.VistasFormularios.Cliente
             ApiBaseDatos.EjecutarInstruccion(instruccion);
         }
 
+        /// <summary>
+        /// Obtener la lista de vehículos
+        /// </summary>
+        /// <param name="dni"></param>
+        /// <returns>Devuelve el Array de vehículos de un DNI concreto</returns>
         public static Vehiculo[] ObtenerListaVehiculos(string dni)
         {
             // Recursos locales 
@@ -41,6 +46,12 @@ namespace GestionTaller.VistasFormularios.Cliente
             return ListaVehiculosCliente;
         }
 
+        /// <summary>
+        /// Devuelve un solo vehículo
+        /// </summary>
+        /// <param name="dni">DNI del cliente</param>
+        /// <param name="numB">NumBastidor del vehículo que queramos seleccionar</param>
+        /// <returns></returns>
         public static Vehiculo ObtenerVehiculo(string dni, string numB)
         {
             string instruccion = $"SELECT * FROM Vehiculos WHERE cDni_Propietario = '{dni}' AND cNBastidor = '{numB}'";
@@ -54,6 +65,14 @@ namespace GestionTaller.VistasFormularios.Cliente
 
         }
 
+        /// <summary>
+        /// Hacer insercción de una reserva
+        /// </summary>
+        /// <param name="fecha"></param>
+        /// <param name="hora"></param>
+        /// <param name="descripcion"></param>
+        /// <param name="dni"></param>
+        /// <param name="numbastidor"></param>
         public static void InsertarReserva(string fecha, string hora, string descripcion, string dni, string numbastidor)
         {
             ApiBaseDatos.EjecutarInstruccion(
@@ -61,6 +80,14 @@ namespace GestionTaller.VistasFormularios.Cliente
             $"(dFecha, tHora, vDescripcion, cDni_Cliente, cNBastidor) VALUES " +
             $"('{fecha}', '{hora}', '{descripcion}', '{dni}', '{numbastidor}')");
         }
+
+        /// <summary>
+        /// Dar formato a la fecha, para que SQL Transact pueda inserar la fecha
+        /// </summary>
+        /// <param name="anio"></param>
+        /// <param name="mes"></param>
+        /// <param name="dia"></param>
+        /// <returns> Antes (MM/DD/YYYYS), Ahora, (YYYY-MM/DD)</returns>
         public static string FormatearFecha(string anio, string mes, string dia)
         {
             return anio + "-" + mes + "-" + dia;

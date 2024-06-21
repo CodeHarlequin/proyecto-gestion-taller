@@ -13,7 +13,7 @@ namespace GestionTaller.VistasFormularios.Cliente
 {
     public partial class fPrincipalCliente : Form
     {
-        //// No olvidar Borrar
+        // No olvidar Borrar
         //private Usuarios.Cliente CargarDatosPrueba()
         //{
         //    Usuarios.Cliente c = new Usuarios.Cliente("12345678Y", "Fran", "Gallardo", "333333333", "cC´s>23dasdñ");
@@ -33,16 +33,17 @@ namespace GestionTaller.VistasFormularios.Cliente
         }
 
         // Constructor
+        /// <summary>
+        /// El constructor necesita del Objeto Cliente
+        /// </summary>
+        /// <param name="propietario">Objeto Cliente</param>
         public fPrincipalCliente(Usuarios.Cliente propietario)
         {
             Propietario = propietario;
             InitializeComponent();
         }
 
-        public fPrincipalCliente()
-        {
-            InitializeComponent();
-        }
+
 
         #endregion
 

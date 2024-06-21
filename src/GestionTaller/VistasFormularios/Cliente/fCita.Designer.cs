@@ -38,20 +38,9 @@
             bGuardar = new Button();
             mtbHora = new MaskedTextBox();
             dgvListaVehiculos = new DataGridView();
-            numBastidorDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            matriculaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            marcaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            modeloDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            tipoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            vehiculoBindingSource = new BindingSource(components);
-            vehiculoBindingSource1 = new BindingSource(components);
-            vehiculoBindingSource2 = new BindingSource(components);
             labelInfo = new Label();
             ((System.ComponentModel.ISupportInitialize)infoError).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvListaVehiculos).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)vehiculoBindingSource).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)vehiculoBindingSource1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)vehiculoBindingSource2).BeginInit();
             SuspendLayout();
             // 
             // infoError
@@ -138,65 +127,15 @@
             dgvListaVehiculos.AllowUserToDeleteRows = false;
             dgvListaVehiculos.AllowUserToResizeColumns = false;
             dgvListaVehiculos.AllowUserToResizeRows = false;
-            dgvListaVehiculos.AutoGenerateColumns = false;
             dgvListaVehiculos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvListaVehiculos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvListaVehiculos.Columns.AddRange(new DataGridViewColumn[] { numBastidorDataGridViewTextBoxColumn, matriculaDataGridViewTextBoxColumn, marcaDataGridViewTextBoxColumn, modeloDataGridViewTextBoxColumn, tipoDataGridViewTextBoxColumn });
-            dgvListaVehiculos.DataSource = vehiculoBindingSource;
             dgvListaVehiculos.Location = new Point(12, 38);
             dgvListaVehiculos.Name = "dgvListaVehiculos";
             dgvListaVehiculos.ReadOnly = true;
             dgvListaVehiculos.RowTemplate.Height = 25;
-            dgvListaVehiculos.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            dgvListaVehiculos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvListaVehiculos.Size = new Size(617, 149);
             dgvListaVehiculos.TabIndex = 11;
-            // 
-            // numBastidorDataGridViewTextBoxColumn
-            // 
-            numBastidorDataGridViewTextBoxColumn.DataPropertyName = "NumBastidor";
-            numBastidorDataGridViewTextBoxColumn.HeaderText = "NumBastidor";
-            numBastidorDataGridViewTextBoxColumn.Name = "numBastidorDataGridViewTextBoxColumn";
-            numBastidorDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // matriculaDataGridViewTextBoxColumn
-            // 
-            matriculaDataGridViewTextBoxColumn.DataPropertyName = "Matricula";
-            matriculaDataGridViewTextBoxColumn.HeaderText = "Matricula";
-            matriculaDataGridViewTextBoxColumn.Name = "matriculaDataGridViewTextBoxColumn";
-            matriculaDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // marcaDataGridViewTextBoxColumn
-            // 
-            marcaDataGridViewTextBoxColumn.DataPropertyName = "Marca";
-            marcaDataGridViewTextBoxColumn.HeaderText = "Marca";
-            marcaDataGridViewTextBoxColumn.Name = "marcaDataGridViewTextBoxColumn";
-            marcaDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // modeloDataGridViewTextBoxColumn
-            // 
-            modeloDataGridViewTextBoxColumn.DataPropertyName = "Modelo";
-            modeloDataGridViewTextBoxColumn.HeaderText = "Modelo";
-            modeloDataGridViewTextBoxColumn.Name = "modeloDataGridViewTextBoxColumn";
-            modeloDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // tipoDataGridViewTextBoxColumn
-            // 
-            tipoDataGridViewTextBoxColumn.DataPropertyName = "Tipo";
-            tipoDataGridViewTextBoxColumn.HeaderText = "Tipo";
-            tipoDataGridViewTextBoxColumn.Name = "tipoDataGridViewTextBoxColumn";
-            tipoDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // vehiculoBindingSource
-            // 
-            vehiculoBindingSource.DataSource = typeof(ModeloVehiculos.Vehiculo);
-            // 
-            // vehiculoBindingSource1
-            // 
-            vehiculoBindingSource1.DataSource = typeof(ModeloVehiculos.Vehiculo);
-            // 
-            // vehiculoBindingSource2
-            // 
-            vehiculoBindingSource2.DataSource = typeof(ModeloVehiculos.Vehiculo);
             // 
             // labelInfo
             // 
@@ -229,9 +168,6 @@
             Load += fCita_Load;
             ((System.ComponentModel.ISupportInitialize)infoError).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvListaVehiculos).EndInit();
-            ((System.ComponentModel.ISupportInitialize)vehiculoBindingSource).EndInit();
-            ((System.ComponentModel.ISupportInitialize)vehiculoBindingSource1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)vehiculoBindingSource2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -246,14 +182,6 @@
       private Button bGuardar;
       private MaskedTextBox mtbHora;
       private DataGridView dgvListaVehiculos;
-        private BindingSource vehiculoBindingSource;
-        private BindingSource vehiculoBindingSource1;
-        private BindingSource vehiculoBindingSource2;
-        private DataGridViewTextBoxColumn numBastidorDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn matriculaDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn marcaDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn modeloDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn tipoDataGridViewTextBoxColumn;
         private Label labelInfo;
     }
 }
