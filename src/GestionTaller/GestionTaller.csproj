@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Apis\BaseDatos\BaseDatos.csproj" />
+    <ProjectReference Include="..\BibliotecaClases\ModeloUsuarios\Usuarios.csproj" />
+    <ProjectReference Include="..\BibliotecaClases\ModeloVehiculos\Vehiculos.csproj" />
     <ProjectReference Include="..\BibliotecaClases\ModeloInfoGestion\InfoGestion.csproj" />
     <ProjectReference Include="..\Apis\InicioSesion\InicioSesion.csproj" />
     <ProjectReference Include="..\BibliotecaClases\ModeloUsuarios\Usuarios.csproj" />
