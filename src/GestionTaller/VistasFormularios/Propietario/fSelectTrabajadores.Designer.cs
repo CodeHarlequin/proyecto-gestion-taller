@@ -66,6 +66,7 @@
          bGuardar.TabIndex = 6;
          bGuardar.Text = "Guardar";
          bGuardar.UseVisualStyleBackColor = true;
+         bGuardar.Click += bGuardar_Click;
          // 
          // lJefe
          // 
@@ -79,12 +80,15 @@
          // 
          // cbJefe
          // 
+         cbJefe.DropDownStyle = ComboBoxStyle.DropDownList;
          cbJefe.FormattingEnabled = true;
          cbJefe.Location = new Point(141, 173);
          cbJefe.Margin = new Padding(4, 3, 4, 3);
          cbJefe.Name = "cbJefe";
          cbJefe.Size = new Size(496, 23);
          cbJefe.TabIndex = 3;
+         cbJefe.DropDown += cbJefe_DropDown;
+         cbJefe.SelectedIndexChanged += cbJefe_SelectedIndexChanged;
          // 
          // tbMatricula
          // 
@@ -189,7 +193,7 @@
          clbMecanicos.Size = new Size(617, 112);
          clbMecanicos.TabIndex = 33;
          // 
-         // fMecanicos
+         // fSelectTrabajadores
          // 
          AutoScaleDimensions = new SizeF(7F, 15F);
          AutoScaleMode = AutoScaleMode.Font;
@@ -211,8 +215,9 @@
          Controls.Add(bGuardar);
          Controls.Add(lJefe);
          Margin = new Padding(4, 3, 4, 3);
-         Name = "fMecanicos";
+         Name = "fSelectTrabajadores";
          Text = "Taller: Asignación de mecánicos";
+         Load += fSelectTrabajadores_Load;
          ResumeLayout(false);
          PerformLayout();
       }

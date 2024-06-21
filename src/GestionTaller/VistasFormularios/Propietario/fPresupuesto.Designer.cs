@@ -28,6 +28,7 @@
       /// </summary>
       private void InitializeComponent()
       {
+         components = new System.ComponentModel.Container();
          bGuardar = new Button();
          tbDescripcion = new TextBox();
          lDescipcion = new Label();
@@ -44,7 +45,9 @@
          lTipo = new Label();
          tbModelo = new TextBox();
          tbMatricula = new TextBox();
+         informarError = new ErrorProvider(components);
          ((System.ComponentModel.ISupportInitialize)nudPresupuesto).BeginInit();
+         ((System.ComponentModel.ISupportInitialize)informarError).BeginInit();
          SuspendLayout();
          // 
          // bGuardar
@@ -57,6 +60,7 @@
          bGuardar.TabIndex = 16;
          bGuardar.Text = "Guardar";
          bGuardar.UseVisualStyleBackColor = true;
+         bGuardar.Click += bGuardar_Click;
          // 
          // tbDescripcion
          // 
@@ -195,6 +199,10 @@
          tbMatricula.Size = new Size(148, 23);
          tbMatricula.TabIndex = 4;
          // 
+         // informarError
+         // 
+         informarError.ContainerControl = this;
+         // 
          // fPresupuesto
          // 
          AutoScaleDimensions = new SizeF(7F, 15F);
@@ -219,7 +227,9 @@
          Margin = new Padding(4, 3, 4, 3);
          Name = "fPresupuesto";
          Text = "Taller: Asignación del presupuesto";
+         Load += fPresupuesto_Load;
          ((System.ComponentModel.ISupportInitialize)nudPresupuesto).EndInit();
+         ((System.ComponentModel.ISupportInitialize)informarError).EndInit();
          ResumeLayout(false);
          PerformLayout();
       }
@@ -245,5 +255,6 @@
       private Label lTipo;
       private TextBox tbModelo;
       private TextBox tbMatricula;
+      private ErrorProvider informarError;
    }
 }
