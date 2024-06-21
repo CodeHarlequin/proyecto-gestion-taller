@@ -18,7 +18,7 @@ namespace GestConfTaller
          Propietario propietarioDevolver = null;
 
          // Optiene los registros del fichero
-         registroDatos = File.ReadAllLines($"..\\..\\..\\..\\src\\Configuracion\\{NOMBRE}{EXTENCION}")[0];
+         registroDatos = File.ReadAllLines($"..\\..\\..\\..\\Configuracion\\{NOMBRE}{EXTENCION}")[0];
 
          if (registroDatos != null)
          {
