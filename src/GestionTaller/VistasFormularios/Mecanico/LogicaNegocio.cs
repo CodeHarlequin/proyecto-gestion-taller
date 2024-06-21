@@ -18,7 +18,7 @@ namespace GestionTaller.VistasFormularios.Mecanico
             string consultaRealizar;
 
             // Inializacion 
-            consultaRealizar = $"SELECT * FROM Reparaciones WHERE iCodigo_Reparacion IN (SELECT iCodigo_Reparacion FROM MecanicoReparacion WHERE cDni_Mecanico = '{codEmpleado}') AND vEstado = 'Reparacion'";
+            consultaRealizar = $"SELECT * FROM Reparaciones WHERE iCodigo_Reparacion IN (SELECT iCodigo_Reparacion FROM MecanicoReparacion WHERE cDni_Mecanico = '{codEmpleado}') AND vEstado = '{Reparacion.Estado.Reparacion}'";
 
             // Proceso de optencion de los valores
             listaObtenida = ApiBaseDatos.OptenerListaObjetos(consultaRealizar);
@@ -48,7 +48,7 @@ namespace GestionTaller.VistasFormularios.Mecanico
             string consultaRealizar;
 
             // Inializacion 
-            consultaRealizar = $"SELECT * FROM Operaciones";
+            consultaRealizar = $"SELECT vNombre FROM Operaciones";
 
             // Proceso de optencion de los valores
             listaObtenida = ApiBaseDatos.OptenerListaObjetos(consultaRealizar);
@@ -71,7 +71,7 @@ namespace GestionTaller.VistasFormularios.Mecanico
 
         internal static void ActualizarEstado(int codigoRep)
         {
-            ApiBaseDatos.EjecutarInstruccion($"UPDATE Reparaciones SET vEstado = 'Completado' WHERE iCodigo_Reparacion = {codigoRep}");
+            ApiBaseDatos.EjecutarInstruccion($"UPDATE Reparaciones SET vEstado = '{Reparacion.Estado.Completado}' WHERE iCodigo_Reparacion = {codigoRep}");
         }
     }
 }
