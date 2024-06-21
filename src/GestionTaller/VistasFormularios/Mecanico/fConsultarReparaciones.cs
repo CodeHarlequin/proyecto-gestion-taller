@@ -27,6 +27,11 @@ namespace GestionTaller.VistasFormularios.Mecanico
             InitializeComponent();
         }
 
+        public fConsultarReparaciones(Empleado mecanico) : base()
+        {
+            MecanicoSeleccionado = mecanico;
+        }
+
         private void fConsultarReparaciones_Load(object sender, EventArgs e)
         {
             // Desactivamos el botón de modificar

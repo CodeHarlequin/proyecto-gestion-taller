@@ -51,7 +51,7 @@ namespace GestionTaller
 
       private void bLogin_Click(object sender, EventArgs e)
       {
-         Persona usuarioLoguear;
+         Persona usuarioLoguear = null;
          Form formularioMostrar = null;
          bool esCorrecto = true;
 
@@ -60,10 +60,12 @@ namespace GestionTaller
             switch (cbTipoUsuario.SelectedItem)
             {
                case nameof(TipoUsuario.Cliente):
-                  ApiLoguin.Login<Cliente>(new Cliente(mtbUsuario.Text, tbContrasenia.Text));
+                  usuarioLoguear = new Cliente(mtbUsuario.Text, tbContrasenia.Text);
+                  ApiLoguin.Login<Cliente>(usuarioLoguear);
                   break;
                case nameof(TipoUsuario.Empleado):
-                  ApiLoguin.Login<Empleado>(new Empleado(mtbUsuario.Text, tbContrasenia.Text));
+                  usuarioLoguear = new Empleado(mtbUsuario.Text, tbContrasenia.Text);
+                  ApiLoguin.Login<Empleado>(usuarioLoguear);
                   break;
                case nameof(TipoUsuario.Propietario):
                   ApiLoguin.LoginEspacial(new Propietario(mtbUsuario.Text, tbContrasenia.Text));
@@ -81,10 +83,10 @@ namespace GestionTaller
             switch (cbTipoUsuario.SelectedItem)
             {
                case nameof(TipoUsuario.Cliente):
-                  formularioMostrar = new fCita();
+                  formularioMostrar = new fCita((Cliente)usuarioLoguear);
                   break;
                case nameof(TipoUsuario.Empleado):
-                  formularioMostrar = new fConsultarReparaciones();
+                  formularioMostrar = new fConsultarReparaciones((Empleado)usuarioLoguear);
                   break;
                case nameof(TipoUsuario.Propietario):
                   formularioMostrar = new fReparaciones();
