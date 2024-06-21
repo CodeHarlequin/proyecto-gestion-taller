@@ -29,7 +29,7 @@
       private void InitializeComponent()
       {
          components = new System.ComponentModel.Container();
-         DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+         DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
          infoError = new ErrorProvider(components);
          lReparaciones = new Label();
          bPresupuesto = new Button();
@@ -65,6 +65,7 @@
          bPresupuesto.TabIndex = 2;
          bPresupuesto.Text = "Asignar Presupuesto";
          bPresupuesto.UseVisualStyleBackColor = true;
+         bPresupuesto.Click += bAcccion_Click;
          // 
          // bTrabajadores
          // 
@@ -76,20 +77,21 @@
          bTrabajadores.TabIndex = 3;
          bTrabajadores.Text = "Asignar Trabajadores";
          bTrabajadores.UseVisualStyleBackColor = true;
+         bTrabajadores.Click += bAcccion_Click;
          // 
          // dgvReparaciones
          // 
          dgvReparaciones.AllowUserToAddRows = false;
          dgvReparaciones.AllowUserToDeleteRows = false;
          dgvReparaciones.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-         dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-         dataGridViewCellStyle1.BackColor = SystemColors.Control;
-         dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-         dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-         dataGridViewCellStyle1.SelectionBackColor = Color.DodgerBlue;
-         dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-         dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-         dgvReparaciones.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+         dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+         dataGridViewCellStyle2.BackColor = SystemColors.Control;
+         dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+         dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+         dataGridViewCellStyle2.SelectionBackColor = Color.DodgerBlue;
+         dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+         dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+         dgvReparaciones.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
          dgvReparaciones.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
          dgvReparaciones.Location = new Point(34, 59);
          dgvReparaciones.Name = "dgvReparaciones";
@@ -98,6 +100,7 @@
          dgvReparaciones.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
          dgvReparaciones.Size = new Size(617, 304);
          dgvReparaciones.TabIndex = 1;
+         dgvReparaciones.CellClick += dgvReparaciones_CellClick;
          // 
          // fReparaciones
          // 
@@ -111,6 +114,7 @@
          Margin = new Padding(4, 3, 4, 3);
          Name = "fReparaciones";
          Text = "Taller: Gestión de Reparaciones";
+         Load += fReparaciones_Load;
          ((System.ComponentModel.ISupportInitialize)infoError).EndInit();
          ((System.ComponentModel.ISupportInitialize)dgvReparaciones).EndInit();
          ResumeLayout(false);
