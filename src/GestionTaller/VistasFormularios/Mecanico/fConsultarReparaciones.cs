@@ -27,7 +27,7 @@ namespace GestionTaller.VistasFormularios.Mecanico
             InitializeComponent();
         }
 
-        public fConsultarReparaciones(Empleado mecanico) : base()
+        public fConsultarReparaciones(Empleado mecanico) : this()
         {
             MecanicoSeleccionado = mecanico;
         }
