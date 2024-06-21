@@ -8,4 +8,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Apis\InicioSesion\InicioSesion.csproj" />
+    <ProjectReference Include="..\BibliotecaClases\ModeloUsuarios\Usuarios.csproj" />
+  </ItemGroup>
+
 </Project>

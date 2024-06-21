@@ -70,6 +70,7 @@
          tbContrasenia.Size = new Size(210, 23);
          tbContrasenia.TabIndex = 6;
          tbContrasenia.UseSystemPasswordChar = true;
+         tbContrasenia.TextChanged += tbNoNulos_TextChanged;
          // 
          // lBienvenida
          // 
@@ -92,6 +93,7 @@
          bLogin.TabIndex = 7;
          bLogin.Text = "Iniciar sesión";
          bLogin.UseVisualStyleBackColor = true;
+         bLogin.Click += bLogin_Click;
          // 
          // infoError
          // 
@@ -106,7 +108,8 @@
          mtbUsuario.Name = "mtbUsuario";
          mtbUsuario.Size = new Size(210, 23);
          mtbUsuario.TabIndex = 4;
-         mtbUsuario.TextMaskFormat = MaskFormat.IncludePrompt;
+         mtbUsuario.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+         mtbUsuario.TextChanged += tbNoNulos_TextChanged;
          // 
          // lTipo
          // 
@@ -119,11 +122,13 @@
          // 
          // cbTipoUsuario
          // 
+         cbTipoUsuario.DropDownStyle = ComboBoxStyle.DropDownList;
          cbTipoUsuario.FormattingEnabled = true;
          cbTipoUsuario.Location = new Point(156, 68);
          cbTipoUsuario.Name = "cbTipoUsuario";
          cbTipoUsuario.Size = new Size(210, 23);
          cbTipoUsuario.TabIndex = 2;
+         cbTipoUsuario.SelectedIndexChanged += cbTipoUsuario_SelectedIndexChanged;
          // 
          // fLogin
          // 
@@ -141,6 +146,7 @@
          Margin = new Padding(4, 3, 4, 3);
          Name = "fLogin";
          Text = "Taller: Inicio de sesión";
+         Load += fLogin_Load;
          ((System.ComponentModel.ISupportInitialize)infoError).EndInit();
          ResumeLayout(false);
          PerformLayout();
