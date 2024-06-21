@@ -58,15 +58,23 @@ namespace InfoGestion
          InformacionAdicional = infoAdicional;
       }
 
-      // Utilizado para optener toda la informacion de la reparaciones
-      public Reparacion(int codigoRep, Vehiculo vehiculo, DateTime fechaInicio, DateTime fechaFin, Operacion[] operaciones, string estado, string infoAdicional, float presupuesto)
-         : this(vehiculo, operaciones, infoAdicional)
+      public Reparacion(int codigoRep, Vehiculo vehiculo, DateTime fechaInicio, DateTime fechaFin, string estado, Empleado jefe)
       {
-         Presupuesto = presupuesto;
+         VehiculoImplicado = vehiculo;
+         JefeMecanico = jefe;
          CodigoRep = codigoRep;
          FechaInicio = fechaInicio;
          FechaFin = fechaFin;
          EstadoRep = (Estado)Array.IndexOf(Enum.GetNames(typeof(Estado)), estado);
+      }
+
+      // Utilizado para optener toda la informacion de la reparaciones
+      public Reparacion(int codigoRep, Vehiculo vehiculo, DateTime fechaInicio, DateTime fechaFin, Empleado jefe, Operacion[] operaciones, string estado, string infoAdicional, float presupuesto)
+         : this(codigoRep, vehiculo, fechaInicio, fechaFin, estado, jefe)
+      {
+         Presupuesto = presupuesto;
+         InformacionAdicional = infoAdicional;
+         ListaOperaciones = operaciones;
       }
 
       #endregion
